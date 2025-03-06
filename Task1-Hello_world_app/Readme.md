@@ -49,7 +49,7 @@ CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';
 GRANT ALL PRIVILEGES ON message_db.* TO 'myuser'@'%';
 FLUSH PRIVILEGES;
 ```
-- create a init.sql query
+- Create a init.sql Schema 
 ```sh
 -- Create the database
 CREATE DATABASE IF NOT EXISTS message_db;
@@ -66,4 +66,15 @@ CREATE TABLE IF NOT EXISTS messages (
 -- Insert sample data
 INSERT INTO messages (message) VALUES ('Hello, World!');
 INSERT INTO messages (message) VALUES ('Welcome to the Flask MySQL App!');
+```
+- Exit from the database and Initialize the Database
+```sh
+
+mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p message_db < init.sql
+```
+- login to mysql server and check for the schema
+```sh
+mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p
+USE message_db;
+SELECT * FROM messages;
 ```
