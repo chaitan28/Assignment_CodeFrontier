@@ -99,6 +99,10 @@ MYSQL_DB=message_db
 ```sh
 python app.py
 ```
+- Now , your can access the application 
+```sh
+http://135.235.162.200:5000/
+```
 
 - To exit the virtual environment, simply run:
 ```sh
