@@ -75,6 +75,9 @@ mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p message_db
 - login to mysql server and check for the schema
 ```sh
 mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p
+```
+- After Login to Mysql , type below:
+```sh
 USE message_db;
 SELECT * FROM messages;
 ```
