@@ -78,3 +78,26 @@ mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p
 USE message_db;
 SELECT * FROM messages;
 ```
+- system has PEP 668 (externally-managed-environment) enabled, which prevents pip from installing packages system-wide
+- Create and activate a virtual environment (Recommended):
+```sh
+python3 -m venv venv
+source venv/bin/activate
+pip install Flask mysql-connector-python python-dotenv
+```
+- Create the .env File
+```sh
+MYSQL_SERVER=codefrontier.mysql.database.azure.com
+MYSQL_USER=myuser
+MYSQL_PASSWORD=mypassword
+MYSQL_DB=message_db
+```
+- Run the code 
+```sh
+python app.py
+```
+
+- To exit the virtual environment, simply run:
+```sh
+deactivate
+```
