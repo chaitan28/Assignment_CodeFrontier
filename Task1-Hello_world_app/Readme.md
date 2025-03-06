@@ -28,3 +28,42 @@ username=admin123
 password=Admin@280324
 ssl-mode=require
 ```
+- installation of myql server in the ubuntu.
+```sh
+sudo apt update
+sudo apt install mysql-server
+```
+- Connect to the MySQL Server:
+```sh
+
+mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p
+
+```
+- create a DateBase
+```sh
+CREATE DATABASE message_db;
+```
+- Create a User and Grant Permissions:
+```sh
+CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';
+GRANT ALL PRIVILEGES ON message_db.* TO 'myuser'@'%';
+FLUSH PRIVILEGES;
+```
+- create a init.sql query
+```sh
+-- Create the database
+CREATE DATABASE IF NOT EXISTS message_db;
+
+-- Use the database
+USE message_db;
+
+-- Create the messages table
+CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message TEXT NOT NULL
+);
+
+-- Insert sample data
+INSERT INTO messages (message) VALUES ('Hello, World!');
+INSERT INTO messages (message) VALUES ('Welcome to the Flask MySQL App!');
+```
