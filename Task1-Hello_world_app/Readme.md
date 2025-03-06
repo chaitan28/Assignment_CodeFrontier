@@ -20,3 +20,11 @@ IP: 135.235.162.200
 - Compute + Storage: Standard_B1ms (1 vCore, 2 GiB memory, 640 max iops)
 - Admin Username: admin123
 - Password: Admin@280324
+- Connect to the MySQL database using environment variables for
+```sh
+hostname=codefrontier.mysql.database.azure.com
+port=3306
+username=admin123
+password=Admin@280324
+ssl-mode=require
+```
