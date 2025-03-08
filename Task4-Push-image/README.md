@@ -1,4 +1,4 @@
-## 1.Login to Docker Hub
+## 1. Login to Docker Hub
 - Create a access token in the DockerHub
 - Create a public repository in DockerHub
 - Use below command and enter the username, access token as password.
@@ -6,7 +6,7 @@
 docker login
 ```
 
-## 2: Build the Docker Image
+## 2. Build the Docker Image
 - Navigate to the directory containing your Dockerfile and run
 ```sh
 docker build -t flask-mysql-app:v1 .
