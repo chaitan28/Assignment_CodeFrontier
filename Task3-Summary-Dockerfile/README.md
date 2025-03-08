@@ -13,13 +13,12 @@ git --version
 
 - Copy the repository to the local from the remote repository
 ```sh
-git clone 
+git clone https://github.com/chaitan28/Assignment_CodeFrontier.git
+cd Task2-Dockerfile
 ```
-Create the Dockerfile:
-Ensure you have a Dockerfile in your project directory. Here’s an example:
-
-Dockerfile
-Copy
+- Create the Dockerfile: Ensure you have a Dockerfile in your project directory. 
+- Dockerfile
+```sh
 # Use a lightweight Python base image
 FROM python:3.9-slim
 
@@ -40,111 +39,59 @@ EXPOSE 8080
 
 # Run the application
 CMD ["python3", "app.py"]
-Create the requirements.txt File:
+```
+- Create the requirements.txt File:
 Ensure you have a requirements.txt file with the following content:
-
-plaintext
-Copy
+```sh
 Flask==2.3.2
 mysql-connector-python==8.1.0
 python-dotenv==1.0.0
-Build the Docker Image:
-Run the following command to build the Docker image:
+```
+- Build the Docker Image: Run the following command to build the Docker image
+```sh
+docker build -t flask-mysql-app:v1  .
+```
 
-bash
-Copy
-docker build -t flask-mysql-app .
--t flask-mysql-app: Tags the image with the name flask-mysql-app.
-
-.: Specifies the current directory as the build context.
-
-Verify the Docker Image:
-Check that the image was built successfully:
-
-bash
-Copy
+- Verify the Docker Image
+```sh
 docker images
-You should see flask-mysql-app in the list.
+```
+## 3. Instructions to Run the Application Locally
 
-Instructions to Run the Application Locally
-Set Up the MySQL Database:
+- Log in to MySQL:
+```sh
+mysql -h codefrontier.mysql.database.azure.com -P 3306 -u admin123 -p
+```
+- Create the database and table:
+```sh
+-- Create the database
+CREATE DATABASE IF NOT EXISTS message_db;
 
-Log in to MySQL:
-
-bash
-Copy
-mysql -u root -p
-Create the database and table:
-
-sql
-Copy
-CREATE DATABASE message_db;
+-- Use the database
 USE message_db;
 
-CREATE TABLE messages (
+-- Create the messages table
+CREATE TABLE IF NOT EXISTS messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     message TEXT NOT NULL
 );
 
+-- Insert sample data
 INSERT INTO messages (message) VALUES ('Hello, World!');
+INSERT INTO messages (message) VALUES ('Welcome to the Flask MySQL App!');
+```
+
 Run the Docker Container:
 Run the container with the necessary environment variables:
-
-bash
-Copy
+```sh
 docker run -p 8080:8080 \
-  -e MYSQL_SERVER=localhost \
-  -e MYSQL_USER=root \
-  -e MYSQL_PASSWORD=your_mysql_password \
+  -e MYSQL_SERVER=codefrontier.mysql.database.azure.com\
+  -e MYSQL_USER=myuser \
+  -e MYSQL_PASSWORD=mypassword \
   -e MYSQL_DB=message_db \
-  flask-mysql-app
-Replace your_mysql_password with your MySQL root password.
-
-Access the Application:
+  flask-app
+```
+- Access the Application:
 Open your browser and navigate to http://localhost:8080. You should see:
 
-Copy
 Message from database: Hello, World!
-Prerequisites for Running the Application
-Docker:
-
-Ensure Docker is installed and running.
-
-MySQL Server:
-
-Ensure MySQL is installed and running.
-
-Create the message_db database and messages table (see above).
-
-Environment Variables:
-
-Ensure the correct environment variables are passed to the Docker container:
-
-MYSQL_SERVER: MySQL server host (e.g., localhost).
-
-MYSQL_USER: MySQL username (e.g., root).
-
-MYSQL_PASSWORD: MySQL password.
-
-MYSQL_DB: MySQL database name (e.g., message_db).
-
-Network Configuration:
-
-If MySQL is running on your local machine, ensure the Docker container can access it. Use host.docker.internal as the MYSQL_SERVER on macOS/Windows:
-
-bash
-Copy
-docker run -p 8080:8080 \
-  -e MYSQL_SERVER=host.docker.internal \
-  -e MYSQL_USER=root \
-  -e MYSQL_PASSWORD=your_mysql_password \
-  -e MYSQL_DB=message_db \
-  flask-mysql-app
-Summary
-Prerequisites: Docker, MySQL, and environment variables.
-
-Build the Docker Image: Use docker build -t flask-mysql-app ..
-
-Run the Application: Use docker run with the appropriate environment variables.
-
-Access the Application: Open http://localhost:8080 in your browser.
