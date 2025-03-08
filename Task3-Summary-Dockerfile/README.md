@@ -81,7 +81,7 @@ INSERT INTO messages (message) VALUES ('Hello, World!');
 INSERT INTO messages (message) VALUES ('Welcome to the Flask MySQL App!');
 ```
 
-Run the Docker Container:
+- Run the Docker Container:
 Run the container with the necessary environment variables:
 ```sh
 docker run -p 8080:8080 \
@@ -93,5 +93,4 @@ docker run -p 8080:8080 \
 ```
 - Access the Application:
 Open your browser and navigate to http://localhost:8080. You should see:
-
-Message from database: Hello, World!
+   Message from database: Hello, World!
