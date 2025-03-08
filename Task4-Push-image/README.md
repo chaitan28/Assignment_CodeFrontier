@@ -29,3 +29,9 @@ docker push  chaitan28/codefrontier:flask-mysql-app
 ```sh
 https://hub.docker.com/r/chaitan28/codefrontier/tags
 ```
+
+- Build the container out of the image 
+```sh
+docker pull chaitan28/codefrontier:flask-mysql-app
+docker run -d --name flask-app -p 8080:8080  chaitan28/codefrontier:flask-mysql-app
+```
