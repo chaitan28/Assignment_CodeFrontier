@@ -92,5 +92,5 @@ docker run -p 8080:8080 \
   flask-app
 ```
 - Access the Application:
-Open your browser and navigate to http://localhost:8080. You should see:
+Open your browser and navigate to http://localhost:8080. You should see: <br>
    Message from database: Hello, World!
