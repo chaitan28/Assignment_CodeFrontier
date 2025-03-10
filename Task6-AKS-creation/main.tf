@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  subscription_id = "1d342b09-7474-440d-a4c0-4d42e7768976"  
+  subscription_id = "1d342b09-7474-440d-a4c0-4d42e7768976"
 }
 
 #  Resource Group
@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg" {
   location = "East US"
 }
 
-#  Virtual Network
+# Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = "my-vnet"
   location            = azurerm_resource_group.rg.location
@@ -32,21 +32,31 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = "myaks"
 
- default_node_pool {
-  name           = "default"
-  node_count     = 2
-  vm_size        = "Standard_DS2_v2"
-  vnet_subnet_id = azurerm_subnet.subnet.id
-  os_sku         = "Ubuntu"  # Ensure only Ubuntu nodes are used
-}
+  default_node_pool {
+    name           = "default"
+    node_count     = 2
+    vm_size        = "Standard_DS2_v2"
+    vnet_subnet_id = azurerm_subnet.subnet.id
+    os_sku         = "Ubuntu"  # Ensure only Ubuntu nodes are used
+  }
+
+  # Add SSH access to AKS nodes
+  linux_profile {
+    admin_username = "azureuser"
+
+    ssh_key {
+      key_data = file("C:/Users/user/Desktop/cloud_keys/az/public_key/poc-key.pub")  # Ensure this path is correct
+    }
+  }
 
   identity {
     type = "SystemAssigned"
   }
- depends_on = [azurerm_subnet.subnet]  # Ensures subnet exists before AKS creation
+
+  depends_on = [azurerm_subnet.subnet]  # Ensures subnet exists before AKS creation
+
   tags = {
     Environment = "Dev"
   }
 }
-
 
