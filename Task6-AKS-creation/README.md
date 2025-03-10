@@ -47,8 +47,10 @@ terraform apply -auto-approve
 ### 5️⃣ **Verify AKS Deployment**
 Retrieve the AKS credentials and configure `kubectl`:
 ```sh
-az aks get-credentials --resource-group <resource-group-name> --name <aks-cluster-name>
+az aks get-credentials --resource-group Aks-rg --name my-aks-cluster
 ```
+- This will update your ~/.kube/config file with the AKS cluster credentials.<br>
+
 Check if the nodes are running:
 ```sh
 kubectl get nodes
