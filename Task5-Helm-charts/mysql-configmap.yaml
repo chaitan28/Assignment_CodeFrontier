@@ -1,0 +1,9 @@
+# mysql-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  url: "mysql-service:3306"
+  username: "root"
+  db: "my_database"
