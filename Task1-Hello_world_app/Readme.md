@@ -101,7 +101,7 @@ python app.py
 ```
 - Now , your can access the application 
 ```sh
-http://135.235.162.200:5000/
+http://135.235.175.152:8080/
 ```
 
 - To exit the virtual environment, simply run:
